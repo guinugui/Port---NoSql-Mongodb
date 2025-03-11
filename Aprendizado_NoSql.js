@@ -133,3 +133,30 @@ db.estudantes.updateOne(
 )
 //atualizar um dado, primeiro voce coloca um filtro { nome: "Maria" } aonde estiver nome maria coloca no array grades esses valores
 //  grades: [100, 80, 90, 70, 60]
+
+db.estudantes.updateOne('<filter>', '<update>', '<options>')
+//sintax do update
+
+db.estudantes.updateOne({curso: 'Matematica'}, {$set: {nome: 'Jose Antonio'}})
+//atualizar o nome do aluno que faz o curso de matematica e o one atualiza apenas o primeiro elemento que for encontrato com o filtro 
+
+db.estudantes.replaceOne({_id: 4}, {nome: 'Marcos Paulo', curso: 'oficina mecanica', premio: ['Melhor Ofinica do ano', 'Melhor mecaninco']})
+// o replaceOne altera todo documento
+//one atualiza apenas o primeiro elemento encontrato e o Many atualiza todos os dados encontrato com aquele filtro
+
+
+db.estudantes.deleteMany({})
+// Delete todos documents
+
+db.estudantes.deleteOne({curso: "Matematica"})
+//delete o primeiro registro que encontrar curso de Matematica
+
+db.estudantes.deleteMany({gpa: {$gte: 3.5}})
+// deletar todos os documentos que tem a gpa maior que 3.5
+
+db.estudantes.deleteOne({name: 'Julia'})
+db.estudantes.deleteOne({gpa: 4})
+
+
+
+
