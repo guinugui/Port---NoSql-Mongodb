@@ -156,7 +156,38 @@ db.estudantes.deleteMany({gpa: {$gte: 3.5}})
 
 db.estudantes.deleteOne({name: 'Julia'})
 db.estudantes.deleteOne({gpa: 4})
+//deletes feitos
 
+db.collection.bulkWrite([
+  { operação1 },
+  { operação2 },
+  { operaçãoN }
+], options);
+//essa função é para permitir fazer varias funçoes ao mesmo tempo, exemplo de updateOne, delletOne ou insetOne
 
+db.produtos.insertMany(
+  [
+    { _id: 1, name: "Java Hut", description: "Coffee and cakes" },
+    { _id: 2, name: "Burger Buns", description: "Gourmet hamburgers" },
+    { _id: 3, name: "Coffee Shop", description: "Just coffee" },
+    { _id: 4, name: "Clothes Clothes Clothes", description: "Discount clothing" },
+    { _id: 5, name: "Java Shopping", description: "Indonesian goods" }
+  ]
+)
+//inserir em uma nova instacia
+
+db.stores.createIndex( { name: "text", description: "text" } )
+//exte createIndex é como se fosse um filtro de busca mais rapida criando ele, eu consigo fazer
+//buscas mais eficientes e rapidas 
+
+db.produtos.find({ $text: {$search: "Java Hut Coffee" } })
+//Tudo que tenha os nome  'Java Hut Coffee' deve ser imprimdo
+
+db.produtos.find(
+  { $text: { $search: "java hut coffee" } },
+  { score: { $meta: "textScore" } }
+).sort( { score: { $meta: "textScore" } })
+//o mongodb tem suas proprias relevancia calcula a pontuação de relevância (textScore) 
+// com base em quantas vezes os termos pesquisados aparecem no documento e onde eles aparecem.
 
 
